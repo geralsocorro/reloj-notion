@@ -4,14 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Reloj</title>
+
   <style>
-    body{margin:0;background:#111;color:#fff;font-family:system-ui,Arial;display:grid;place-items:center;height:100vh}
-    .card{padding:28px 34px;border-radius:18px;background:#1a1a1a;box-shadow:0 10px 30px rgba(0,0,0,.35);text-align:center}
-    .city{font-size:18px;opacity:.85;margin-bottom:10px}
-    .time{font-size:54px;font-weight:700;letter-spacing:.5px}
-    .date{margin-top:10px;opacity:.75}
+    html, body{
+      margin:0;
+      padding:0;
+      background: transparent;
+      font-family: system-ui, Arial;
+      color: #111; /* Cambia a #fff si usas Notion en modo oscuro */
+    }
+
+    /* Quitamos el "cuadro" */
+    .card{
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .city{
+      font-size: 18px;
+      opacity: .8;
+      margin-bottom: 8px;
+    }
+
+    .time{
+      font-size: 54px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .date{
+      margin-top: 8px;
+      opacity: .7;
+    }
   </style>
 </head>
+
 <body>
   <div class="card">
     <div class="city" id="city">New York</div>
@@ -20,7 +50,7 @@
   </div>
 
   <script>
-    // Cambia esto por tu zona horaria (IANA)
+    // Cambia esto por tu zona horaria (IANA): "America/Lima", "Europe/Madrid", etc.
     const timeZone = "America/New_York";
     const cityName = "New York";
 
@@ -28,11 +58,20 @@
 
     function tick(){
       const now = new Date();
+
       const timeFmt = new Intl.DateTimeFormat("es-ES", {
-        timeZone, hour: "2-digit", minute: "2-digit", second: "2-digit"
+        timeZone,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
       });
+
       const dateFmt = new Intl.DateTimeFormat("es-ES", {
-        timeZone, weekday:"long", year:"numeric", month:"long", day:"2-digit"
+        timeZone,
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "2-digit"
       });
 
       document.getElementById("time").textContent = timeFmt.format(now);
