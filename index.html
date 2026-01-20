@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Reloj - New York</title>
+  <title>Relojes</title>
 
   <!-- Google Fonts: Mona Sans (SemiBold = 600) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,19 +14,26 @@
     html, body{
       margin:0;
       padding:0;
-      background: transparent; /* sin fondo */
-      color: #fff;            /* texto blanco */
+      background: transparent;
+      color:#fff;
       font-family: "Mona Sans", system-ui, Arial, sans-serif;
-      font-weight: 600;       /* semibold */
+      font-weight: 600;
     }
 
-    /* sin cuadro/tarjeta */
-    .card{
-      background: transparent;
-      box-shadow: none;
-      border-radius: 0;
-      padding: 0;
+    /* Contenedor: 3 relojes en fila si hay espacio, si no se apilan */
+    .wrap{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
+      gap: 18px;
+      align-items: start;
+      justify-items: center;
+      padding: 8px;
+    }
+
+    /* Sin cuadro/tarjeta */
+    .clock{
       text-align: center;
+      background: transparent;
     }
 
     .city{
@@ -40,33 +47,44 @@
       letter-spacing: .5px;
       line-height: 1;
     }
+
+    /* En pantallas angostas: 1 por fila */
+    @media (max-width: 520px){
+      .wrap{ grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="city" id="city">New York</div>
-    <div class="time" id="time">--:--</div>
+  <div class="wrap">
+    <div class="clock" data-tz="America/New_York">
+      <div class="city">New York</div>
+      <div class="time">--:--</div>
+    </div>
+
+    <div class="clock" data-tz="Asia/Tokyo">
+      <div class="city">Tokyo</div>
+      <div class="time">--:--</div>
+    </div>
+
+    <div class="clock" data-tz="Europe/London">
+      <div class="city">London</div>
+      <div class="time">--:--</div>
+    </div>
   </div>
 
   <script>
-    // Horario New York
-    const timeZone = "America/New_York";
-    const cityName = "New York";
-
-    document.getElementById("city").textContent = cityName;
-
     function tick(){
       const now = new Date();
-
-      // SOLO hora y minuto (sin segundos)
-      const timeFmt = new Intl.DateTimeFormat("es-ES", {
-        timeZone,
-        hour: "2-digit",
-        minute: "2-digit"
+      document.querySelectorAll(".clock").forEach(clock => {
+        const tz = clock.getAttribute("data-tz");
+        const timeFmt = new Intl.DateTimeFormat("es-ES", {
+          timeZone: tz,
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+        clock.querySelector(".time").textContent = timeFmt.format(now);
       });
-
-      document.getElementById("time").textContent = timeFmt.format(now);
     }
 
     tick();
