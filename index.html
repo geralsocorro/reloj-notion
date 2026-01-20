@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Reloj</title>
+  <title>Reloj - New York</title>
 
   <!-- Google Fonts: Mona Sans (SemiBold = 600) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,13 +14,13 @@
     html, body{
       margin:0;
       padding:0;
-      background: transparent;
-      color: #fff;
+      background: transparent; /* sin fondo */
+      color: #fff;            /* texto blanco */
       font-family: "Mona Sans", system-ui, Arial, sans-serif;
-      font-weight: 600; /* SemiBold */
+      font-weight: 600;       /* semibold */
     }
 
-    /* Sin "cuadro" */
+    /* sin cuadro/tarjeta */
     .card{
       background: transparent;
       box-shadow: none;
@@ -38,49 +38,35 @@
     .time{
       font-size: 54px;
       letter-spacing: .5px;
-    }
-
-    .date{
-      margin-top: 8px;
-      opacity: .75;
+      line-height: 1;
     }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <div class="city" id="city">Lima</div>
-    <div class="time" id="time">--:--:--</div>
-    <div class="date" id="date"></div>
+    <div class="city" id="city">New York</div>
+    <div class="time" id="time">--:--</div>
   </div>
 
   <script>
-    // Cambia a tu zona horaria/ciudad
-    const timeZone = "America/Lima";
-    const cityName = "Lima";
+    // Horario New York
+    const timeZone = "America/New_York";
+    const cityName = "New York";
 
     document.getElementById("city").textContent = cityName;
 
     function tick(){
       const now = new Date();
 
+      // SOLO hora y minuto (sin segundos)
       const timeFmt = new Intl.DateTimeFormat("es-ES", {
         timeZone,
         hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      });
-
-      const dateFmt = new Intl.DateTimeFormat("es-ES", {
-        timeZone,
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "2-digit"
+        minute: "2-digit"
       });
 
       document.getElementById("time").textContent = timeFmt.format(now);
-      document.getElementById("date").textContent = dateFmt.format(now);
     }
 
     tick();
