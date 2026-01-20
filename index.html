@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reloj</title>
+  <style>
+    body{margin:0;background:#111;color:#fff;font-family:system-ui,Arial;display:grid;place-items:center;height:100vh}
+    .card{padding:28px 34px;border-radius:18px;background:#1a1a1a;box-shadow:0 10px 30px rgba(0,0,0,.35);text-align:center}
+    .city{font-size:18px;opacity:.85;margin-bottom:10px}
+    .time{font-size:54px;font-weight:700;letter-spacing:.5px}
+    .date{margin-top:10px;opacity:.75}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="city" id="city">New York</div>
+    <div class="time" id="time">--:--:--</div>
+    <div class="date" id="date"></div>
+  </div>
+
+  <script>
+    // Cambia esto por tu zona horaria (IANA)
+    const timeZone = "America/New_York";
+    const cityName = "New York";
+
+    document.getElementById("city").textContent = cityName;
+
+    function tick(){
+      const now = new Date();
+      const timeFmt = new Intl.DateTimeFormat("es-ES", {
+        timeZone, hour: "2-digit", minute: "2-digit", second: "2-digit"
+      });
+      const dateFmt = new Intl.DateTimeFormat("es-ES", {
+        timeZone, weekday:"long", year:"numeric", month:"long", day:"2-digit"
+      });
+
+      document.getElementById("time").textContent = timeFmt.format(now);
+      document.getElementById("date").textContent = dateFmt.format(now);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
