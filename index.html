@@ -5,16 +5,22 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Reloj</title>
 
+  <!-- Google Fonts: Mona Sans (SemiBold = 600) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@600&display=swap" rel="stylesheet">
+
   <style>
     html, body{
       margin:0;
       padding:0;
       background: transparent;
-      font-family: system-ui, Arial;
-      color: #fff; /* Cambia a #fff si usas Notion en modo oscuro */
+      color: #fff;
+      font-family: "Mona Sans", system-ui, Arial, sans-serif;
+      font-weight: 600; /* SemiBold */
     }
 
-    /* Quitamos el "cuadro" */
+    /* Sin "cuadro" */
     .card{
       background: transparent;
       box-shadow: none;
@@ -25,34 +31,33 @@
 
     .city{
       font-size: 18px;
-      opacity: .8;
+      opacity: .85;
       margin-bottom: 8px;
     }
 
     .time{
       font-size: 54px;
-      font-weight: 700;
       letter-spacing: .5px;
     }
 
     .date{
       margin-top: 8px;
-      opacity: .7;
+      opacity: .75;
     }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <div class="city" id="city">New York</div>
+    <div class="city" id="city">Lima</div>
     <div class="time" id="time">--:--:--</div>
     <div class="date" id="date"></div>
   </div>
 
   <script>
-    // Cambia esto por tu zona horaria (IANA): "America/Lima", "Europe/Madrid", etc.
-    const timeZone = "America/New_York";
-    const cityName = "New York";
+    // Cambia a tu zona horaria/ciudad
+    const timeZone = "America/Lima";
+    const cityName = "Lima";
 
     document.getElementById("city").textContent = cityName;
 
