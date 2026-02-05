@@ -27,19 +27,24 @@
       gap: 18px;
       align-items: start;
       justify-items: center;
-      padding: 8px;
+      padding: 12px;
     }
 
-    /* Sin cuadro/tarjeta */
+    /* ✅ Cada reloj como "cuadro" con borde lineal */
     .clock{
+      width: 100%;
       text-align: center;
-      background: transparent;
+      border: 1px solid #383836;   /* borde lineal */
+      border-radius: 10px;         /* opcional: esquinas suaves */
+      padding: 14px 12px;
+      background: transparent;     /* mantiene el fondo del body */
+      box-sizing: border-box;
     }
 
     .city{
       font-size: 18px;
       opacity: .85;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .time{
